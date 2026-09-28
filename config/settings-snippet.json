@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 ~/.claude/skills/checkpoint/checkpoint.py *)",
+      "Edit(~/claude-session-register/**)",
+      "Write(~/claude-session-register/**)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "~/.claude/hooks/session-checkpoint-start.sh", "timeout": 10 } ] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [ { "type": "command", "command": "~/.claude/hooks/session-checkpoint-prompt.sh", "timeout": 10 } ] }
+    ],
+    "SessionEnd": [
+      { "hooks": [ { "type": "command", "command": "~/.claude/hooks/session-checkpoint-end.sh", "timeout": 10 } ] }
+    ]
+  }
+}

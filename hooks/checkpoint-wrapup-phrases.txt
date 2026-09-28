@@ -1,0 +1,17 @@
+# One phrase per line, case-insensitive substring match against the prompt.
+# Lines starting with # are ignored. Edit freely; the hook re-reads on every prompt.
+done for now
+done for today
+done with this
+done here
+wrapping up
+wrap up
+wrap this up
+let's stop here
+lets stop here
+stopping here
+that's it for now
+thats it for now
+that's all for now
+park this
+pick this up later
