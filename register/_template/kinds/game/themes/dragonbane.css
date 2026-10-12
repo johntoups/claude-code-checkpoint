@@ -1,0 +1,23 @@
+/* @fonts https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans+SC:wght@500;700&display=swap */
+/* Dragonbane: parchment and woodcut, moss and ochre. Tokens only, plus the label face. */
+:root {
+  --ground:#EFE6D2; --surface:#F8F2E3; --ink:#2A2117; --muted:#6B5C48; --faint:#9A8A72; --rule:#D8C9AA;
+  --accent:#4E6B35; --accent-soft:#E3E6CF; --attn:#9C5A17; --attn-soft:#F3E0C2;
+  --now-bg:#33291C; --now-ink:#F3EAD6; --now-muted:#C7B596; --now-line:#56473A; --now-next:#E6B45E;
+  --sans:"Alegreya",Georgia,"Times New Roman",serif;
+  --cond:"IM Fell English SC","Alegreya",Georgia,serif;
+  --label:"Alegreya Sans SC","Alegreya",Georgia,serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground:#17130D; --surface:#211B13; --ink:#ECE2CB; --muted:#B3A283; --faint:#7F7159; --rule:#3A3124;
+  --accent:#A3BE7C; --accent-soft:#2A3220; --attn:#E4AA5C; --attn-soft:#3A2A16;
+  --now-bg:#2B2217; --now-ink:#F0E6CF; --now-muted:#BCA886; --now-line:#4A3D2E; --now-next:#E6B45E; } }
+:root[data-theme="dark"] {
+  --ground:#17130D; --surface:#211B13; --ink:#ECE2CB; --muted:#B3A283; --faint:#7F7159; --rule:#3A3124;
+  --accent:#A3BE7C; --accent-soft:#2A3220; --attn:#E4AA5C; --attn-soft:#3A2A16;
+  --now-bg:#2B2217; --now-ink:#F0E6CF; --now-muted:#BCA886; --now-line:#4A3D2E; --now-next:#E6B45E; }
+body { font-size:16.5px; }
+.eyebrow, .blk h2, .now h2, .next-label, .toc a b, .who, .stamp span, .ch-num { font-family:var(--label); letter-spacing:.08em; font-size:13px; }
+h1 { font-weight:400; letter-spacing:0; }
+.ch-title { font-weight:400; font-size:20px; }
+.now { background-image:linear-gradient(180deg, rgba(255,255,255,.03), transparent 60%); }

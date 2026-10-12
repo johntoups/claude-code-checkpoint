@@ -14,7 +14,9 @@ You are installing `/checkpoint` for the person you are working with. Read this 
 Fixed (keep as-is unless the user asks):
 - The checkpoint section headings and bold labels in `TEMPLATE.md`. `checkpoint.py` and `render.py` parse them.
 - The five-column table in the register `README.md`. The hooks parse it.
-- The markers `[done]`, `[superseded]`, `[obsolete]`, `[resolved]` and `[pinned]`.
+- The markers `[done]`, `[superseded]`, `[obsolete]`, `[resolved]` and `[pinned]`, and the Sequence states `[done]`, `[now]`, `[gated: why]`, `[blocked: why]`, `[todo]`.
+- The `patch` JSON keys documented in `skill/SKILL.md` and `checkpoint.py --help`.
+- `register/_template/kinds/`: the game kind's section names and the `systems/*.json` field lists.
 - The rules in `config/CLAUDE-snippet.md`. In that snippet, "me" means the user.
 
 Ask the user before choosing:
@@ -42,7 +44,8 @@ Ask the user before choosing:
 8. **Verify without touching the real register.**
    - Copy `register/_template/` and `register/README.md` into a scratch folder.
    - Run `python3 <copy>/_template/checkpoint.py new test-topic "test"`.
-   - Then run `python3 <copy>/_template/checkpoint.py finish test-topic --out <scratch>/out --no-git`.
+   - Then run `echo '{"now":["Test state."],"next":"Test step.","glance":{"Status":"testing"},"add":{"Decisions":["Test decision."]}}' | python3 <copy>/_template/checkpoint.py patch test-topic - --finish --out <scratch>/out --no-git`, and check it prints `PATCHED=` and `PUBLISH=yes`.
+   - Run one bad patch (`echo '{"bogus":1}' | ...`) and check it refuses with "nothing was written".
    - Open the HTML it prints.
    - Pipe `{"transcript_path":"<fake.jsonl>"}` into the start hook, using a fake transcript containing `{"type":"custom-title","customTitle":"test-topic"}`, with `CHECKPOINT_REGISTER` pointed at the copy.
    - Report what you actually observed.

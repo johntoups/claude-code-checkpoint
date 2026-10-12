@@ -1,0 +1,18 @@
+/* Game kind layer: layout only, built from the base tokens so every system theme inherits it. */
+.chapters { display:flex; flex-direction:column; gap:12px; }
+.chapter { background:var(--surface); border:1px solid var(--rule); border-radius:8px; overflow:hidden; }
+.chapter > summary { list-style:none; cursor:pointer; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:14px; align-items:baseline; padding:14px 18px; }
+.chapter > summary::-webkit-details-marker { display:none; }
+.chapter > summary:hover { background:var(--accent-soft); }
+.chapter > summary:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+.ch-num { font:600 11px/1 var(--label, var(--mono)); letter-spacing:.14em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
+.ch-title { font:600 18px/1.3 var(--cond); overflow-wrap:anywhere; }
+.chapter time { font:500 12px/1 var(--mono); color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.chapter[open] > summary { border-bottom:1px solid var(--rule); }
+.ch-body { padding:4px 18px 16px; }
+.ch-body > p:first-child { margin-top:12px; }
+.ch-body blockquote { margin:12px 0; padding:2px 0 2px 14px; border-left:3px solid var(--accent); color:var(--muted); font-style:italic; }
+.next-game { border-top:none; }
+.next-game + .next { padding-top:4px; }
+.next-game p { font-weight:500; }
+@media (max-width:560px) { .chapter > summary { grid-template-columns:minmax(0,1fr) auto; } .ch-num { grid-column:1 / -1; } }

@@ -1,0 +1,7 @@
+{
+  "_doc": "Sheet band fields for Traveller (Mongoose 2022), in display order. Values come from the checkpoint's ## Sheet items; the character sheet file and Foundry stay authoritative.",
+  "title": "Traveller",
+  "identity": ["Name", "Career", "Homeworld", "Age"],
+  "stats": ["STR", "DEX", "END", "INT", "EDU", "SOC"],
+  "tracks": ["Luck", "Credits", "Ship"]
+}

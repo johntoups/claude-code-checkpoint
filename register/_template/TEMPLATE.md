@@ -2,6 +2,11 @@
 
 **Session:** `{{SESSION}}` · **Topic:** {{ONE_LINE_TOPIC}} · **Checkpoint:** {{DATE}} {{TIME}} · **Artifact:** {{ARTIFACT_URL}}
 
+## At a glance
+
+- **Status:** One or two words (for example: in progress, gated, blocked, monitoring).
+- **Owner:** Who moves it next.
+
 ## Now
 
 Two or three sentences: what state the work is in right now, and what was in flight when this checkpoint was taken. Rewritten every checkpoint.

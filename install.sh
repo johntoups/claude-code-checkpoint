@@ -8,16 +8,21 @@ STAMP=$(date +%Y%m%d%H%M%S)
 backup() { [ -e "$1" ] && [ ! -L "$1" ] && cp "$1" "$1.bak-$STAMP" && echo "backed up $1"; return 0; }
 
 mkdir -p "$HOME/.claude/skills/checkpoint" "$HOME/.claude/hooks/state"
-backup "$HOME/.claude/skills/checkpoint/SKILL.md"
-cp "$SRC/skill/SKILL.md" "$HOME/.claude/skills/checkpoint/SKILL.md"
 for f in "$SRC"/hooks/*; do backup "$HOME/.claude/hooks/$(basename "$f")"; cp "$f" "$HOME/.claude/hooks/"; done
 chmod +x "$HOME"/.claude/hooks/session-checkpoint-*.sh
 
 mkdir -p "$REG/_template"
 [ -e "$REG/README.md" ] || cp "$SRC/register/README.md" "$REG/README.md"
 for f in "$SRC"/register/_template/*; do
+  [ -f "$f" ] || continue
   dst="$REG/_template/$(basename "$f")"; backup "$dst"; cp "$f" "$dst"
 done
+# kinds/ (game checkpoints: template, layout, system sheets, themes, the kind's skill rules)
+cp -R "$SRC/register/_template/kinds" "$REG/_template/"
+# the skill lives with the template so it is versioned in the register; Claude Code reaches it by symlink
+backup "$REG/_template/SKILL.md"; cp "$SRC/skill/SKILL.md" "$REG/_template/SKILL.md"
+backup "$HOME/.claude/skills/checkpoint/SKILL.md"
+ln -sfn "$REG/_template/SKILL.md" "$HOME/.claude/skills/checkpoint/SKILL.md"
 chmod +x "$REG/_template/"*.py
 ln -sfn "$REG/_template/checkpoint.py" "$HOME/.claude/skills/checkpoint/checkpoint.py"
 ln -sfn "$REG/_template/render.py" "$HOME/.claude/skills/checkpoint/render.py"

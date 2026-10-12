@@ -1,0 +1,22 @@
+/* @fonts https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Saira:wght@400;500;600&family=Share+Tech+Mono&display=swap */
+/* Traveller: the little black books. Black band, signal red rule, condensed technical type. Tokens only, plus the label face. */
+:root {
+  --ground:#ECEDEE; --surface:#F7F7F8; --ink:#15171A; --muted:#565B63; --faint:#8A9099; --rule:#D3D6DA;
+  --accent:#B3261E; --accent-soft:#F4E3E1; --attn:#A85A00; --attn-soft:#F6E7D2;
+  --now-bg:#0E0F11; --now-ink:#F1F2F3; --now-muted:#A9AEB6; --now-line:#2E3136; --now-next:#E8483E;
+  --sans:"Saira","Helvetica Neue",Arial,sans-serif;
+  --cond:"Saira Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --label:"Share Tech Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground:#0B0C0E; --surface:#15171A; --ink:#E7E9EC; --muted:#A3A9B2; --faint:#6E747D; --rule:#2A2D32;
+  --accent:#F0574C; --accent-soft:#2E1715; --attn:#F0A24A; --attn-soft:#33240F;
+  --now-bg:#050506; --now-ink:#EEF0F2; --now-muted:#9CA2AB; --now-line:#26292D; --now-next:#F0574C; } }
+:root[data-theme="dark"] {
+  --ground:#0B0C0E; --surface:#15171A; --ink:#E7E9EC; --muted:#A3A9B2; --faint:#6E747D; --rule:#2A2D32;
+  --accent:#F0574C; --accent-soft:#2E1715; --attn:#F0A24A; --attn-soft:#33240F;
+  --now-bg:#050506; --now-ink:#EEF0F2; --now-muted:#9CA2AB; --now-line:#26292D; --now-next:#F0574C; }
+.eyebrow, .blk h2, .now h2, .next-label, .toc a b, .who, .stamp span, .ch-num { font-family:var(--label); letter-spacing:.1em; font-size:12.5px; }
+h1 { font-weight:700; letter-spacing:.01em; text-transform:uppercase; }
+.ch-title { font-weight:600; font-size:19px; letter-spacing:.01em; }
+.now { border-top:4px solid var(--now-next); }

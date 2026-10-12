@@ -18,14 +18,15 @@ Ask me before changing settings.json or CLAUDE.md.
 
 | Path | Installs to | Role |
 |---|---|---|
-| `skill/SKILL.md` | `~/.claude/skills/checkpoint/` | The `/checkpoint` skill: what Claude writes and in what order |
+| `skill/SKILL.md` | `<register>/_template/SKILL.md`, symlinked from `~/.claude/skills/checkpoint/` | The `/checkpoint` skill: what Claude writes and in what order |
 | `hooks/session-checkpoint-start.sh` | `~/.claude/hooks/` | SessionStart: prints session name, checkpoint path, artifact URL; tells Claude to open with the three lines |
 | `hooks/session-checkpoint-prompt.sh` | `~/.claude/hooks/` | UserPromptSubmit: wrap-up phrases trigger a checkpoint; `segue:` prefix; rename detection |
 | `hooks/session-checkpoint-end.sh` | `~/.claude/hooks/` | SessionEnd: marks a session that ended with un-checkpointed work, reported at next start |
 | `hooks/session-checkpoint-lib.sh` | `~/.claude/hooks/` | Shared helpers |
 | `hooks/checkpoint-wrapup-phrases.txt` | `~/.claude/hooks/` | Phrases ("wrap up", "done for today"…) that trigger a checkpoint. Edit freely |
 | `register/README.md` | `~/claude-session-register/` | The register: one table row per session. Hooks read it |
-| `register/_template/` | `~/claude-session-register/_template/` | `TEMPLATE.md` (sections), `checkpoint.py` (new / finish / set-url bookkeeping, archive, commit, push), `render.py` + `checkpoint.css` + `shell.html` (the page) |
+| `register/_template/` | `~/claude-session-register/_template/` | `TEMPLATE.md` (sections), `checkpoint.py` (new / patch / finish / set-url: one-call structured edits, archive, caps, size warnings, commit, push), `render.py` + `checkpoint.css` + `shell.html` (the page) |
+| `register/_template/kinds/` | `~/claude-session-register/_template/kinds/` | Alternative checkpoint kinds. `game`: adventure log, character-sheet band, per-system sheet fields (`systems/`) and themes (Dragonbane, Traveller), and its own skill rules. A project's `.claude/checkpoint.json` selects it |
 | `config/settings-snippet.json` | merge into `~/.claude/settings.json` | Hook registrations and allow rules |
 | `config/CLAUDE-snippet.md` | append to `~/.claude/CLAUDE.md` | The rules Claude follows |
 
@@ -45,6 +46,13 @@ In the original setup these paths were hardcoded to one person's machine. Each o
 | `<scratchpad>/checkpoint-render/` | the session's scratchpad dir | Where `finish` writes the rendered HTML before the Artifact tool publishes it. This output is disposable; the Markdown is the record. | the skill passes it as `--out` | Any temp folder. Never commit it |
 | Artifact URL | set on first publish | The claude.ai page for this session. `set-url` writes it back into the checkpoint header and the register row, because the gallery can't be relied on to find old pages | start hook prints it; the skill republishes to it | Don't hand-edit it. A new URL means a new page |
 | `$CHECKPOINT_OWNER` | first word of `git config user.name` | The label on your items in `Waiting on`. The page highlights `**needs <name>**` as a chip | `checkpoint.py new` | Set it if your git name isn't what you want on the page |
+
+## What a checkpoint does
+
+- **Writing:** the skill puts one JSON change list through `checkpoint.py patch` (all or nothing), which also runs `finish`. That keeps a checkpoint to a few tool calls instead of many hand edits.
+- **Bookkeeping:** `finish` archives marked items, caps Facts (15 in view) and Recent sessions (5 distinct days), commits only that session's files and its attachments (`<session>.<part>.md`), pushes, and prints `WARN=` lines for oversize items. It never cuts content.
+- **The page:** a dark Now band with the single next step, an optional **At a glance** band above it (work) or **character sheet** (game), a section bar with counts, an optional **Sequence** of gated steps, dated ledgers that accept short qualifiers (`2026-10-05 (Sam):`), and the archive folded at the bottom.
+- **Kinds:** `work` is the default. `game` turns the page into an adventure log with a sheet band, "Where we left off", and a next-game date chip.
 
 ## Requirements
 

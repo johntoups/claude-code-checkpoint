@@ -1,0 +1,7 @@
+{
+  "_doc": "Sheet band fields for Dragonbane, in display order. Values come from the checkpoint's ## Sheet items; the character sheet file and Foundry stay authoritative.",
+  "title": "Dragonbane",
+  "identity": ["Name", "Kin", "Profession", "Age"],
+  "stats": ["STR", "CON", "AGL", "INT", "WIL", "CHA"],
+  "tracks": ["HP", "WP", "Move"]
+}
